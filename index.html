@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sonnenseite: Munich terraces in the sun</title>
+    <meta name="description" content="See which Munich terraces, beer gardens and playgrounds are in the sun right now, or at any date and time. Open source, built on open data." />
+    <meta name="theme-color" content="#f5a400" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div id="map" aria-label="Shadow map of Munich"></div>
+
+    <header id="topbar">
+      <div class="brand"><img src="icon.svg" alt="" width="26" height="26" /><span>Sonnenseite</span></div>
+      <div id="search">
+        <input id="q" type="search" placeholder="Search a place or address in Munich" autocomplete="off" aria-label="Search" />
+        <ul id="results" hidden></ul>
+      </div>
+      <button id="wx" class="chip" title="Weather"></button>
+    </header>
+
+    <nav id="cats" aria-label="Categories"></nav>
+
+    <aside id="panel">
+      <div id="tabs" role="tablist">
+        <button data-tab="nearby" class="on">Sunny nearby</button>
+        <button data-tab="place">Place</button>
+        <button data-tab="saved">Saved</button>
+        <button data-tab="weather">Weather</button>
+      </div>
+      <div id="body"></div>
+      <button id="collapse" aria-label="Collapse panel"></button>
+    </aside>
+
+    <footer id="timebar">
+      <button id="now" class="chip on" title="Follow the current time">Now</button>
+      <input id="date" type="date" aria-label="Date" />
+      <input id="slider" type="range" min="0" max="1435" step="5" aria-label="Time of day" />
+      <output id="clock"></output>
+      <button id="play" class="chip" title="Play through the day">Play</button>
+    </footer>
+
+    <div id="hint" hidden></div>
+    <div id="toast" hidden></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

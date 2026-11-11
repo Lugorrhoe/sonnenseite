@@ -1,0 +1,27 @@
+{
+  "name": "sonnenseite",
+  "version": "0.1.0",
+  "description": "Which Munich terraces are in the sun right now? An open source shadow map built on open data.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "fetch-data": "node scripts/fetch-venues.mjs"
+  },
+  "dependencies": {
+    "@mapbox/vector-tile": "^3.0.0",
+    "maplibre-gl": "^5.24.1",
+    "pbf": "^5.1.2",
+    "suncalc": "^2.1.4"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  }
+}

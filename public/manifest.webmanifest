@@ -1,0 +1,11 @@
+{
+  "name": "Sonnenseite: Munich terraces in the sun",
+  "short_name": "Sonnenseite",
+  "description": "See which Munich terraces are in the sun, now or at any date and time.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1d2330",
+  "theme_color": "#f5a400",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
