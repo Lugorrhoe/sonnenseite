@@ -4,7 +4,7 @@
 
 Sonnenseite ("the sunny side") is an open source shadow map for Munich. It computes, in your browser, where building shadows fall at any date and time, and tells you which cafés, beer gardens, playgrounds and sports pitches are in the sun. No account, no API key, no server, no paywall.
 
-**Live demo:** `https://lugorrhoe.github.io/sonnenseite/` (available once GitHub Pages is enabled, see below)
+**Live demo:** <https://lugorrhoe.github.io/sonnenseite/>
 
 <!-- Add a short screen recording here once the site is live: docs/demo.gif -->
 
