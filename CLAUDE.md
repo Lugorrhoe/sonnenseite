@@ -58,7 +58,7 @@ Notes from that test:
 
 ## Next steps, in order
 
-1. Done: live smoke test.
+1. Done: live smoke test, first push, Pages deploy (site is live).
 2. Field check: compare five or so known terraces against reality and note results in the README.
 3. `git init -b main`, first commit, push to `https://github.com/Lugorrhoe/sonnenseite`, enable Pages with source "GitHub Actions". Use a personal or GitHub noreply commit email, not a work address.
 4. Record a short demo GIF into `docs/demo.gif` and link it in the README.

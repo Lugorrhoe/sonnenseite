@@ -78,7 +78,7 @@ Checked by hand in a live smoke test on 11 November 2026 (Chromium, dev server, 
 
 Known console noise: MapLibre logs "Expected value to be of type number, but found null". It appears to come from a label filter in the OpenFreeMap Positron style, not from this app's layers.
 
-Not verified: field accuracy (does the map agree with the street?). A comparison against photos of a few known terraces is the natural next step. Also untested so far: phones, Safari and Firefox, geolocation, notifications, the installed web app and the two GitHub workflows.
+Not verified: field accuracy (does the map agree with the street?). A comparison against photos of a few known terraces is the natural next step. The `Test and deploy` workflow has run successfully and the published files match a local production build byte for byte; the service worker registers and caches the app shell in that build. Still untested: phones, Safari and Firefox, geolocation, notifications, the installed web app and the nightly `Refresh venue data` workflow.
 
 Known issue: `npm audit` reports advisory GHSA-jrc7-96c5-q579 (HTML sanitizer bypass) for MapLibre GL 5; the fix is only in version 6, which this project has not been migrated to yet. The app passes no external HTML to MapLibre popups or attribution, but the upgrade is on the roadmap.
 
