@@ -38,7 +38,7 @@ Run `npm test` and `npm run typecheck` after every change to `src/lib/`.
 ## Facts that are easy to get wrong
 
 - **SunCalc is version 2.** `getPosition` returns degrees, azimuth clockwise from north. Version 1 used radians from south. `sunAt` converts to radians once; everything downstream uses radians, bearing clockwise from north.
-- **MapLibre is pinned to version 5.** Version 6 is ESM only with a separate worker file and was not evaluated. It is imported as a namespace with a `.default` fallback in `main.ts`.
+- **MapLibre is version 6**, ESM only, named exports (no default export). Its worker is a separate file: `main.ts` imports it with Vite `?url` and calls `setWorkerUrl`. Without that the map stays blank in the production build. Restart the dev server after changing dependencies.
 - **Coordinates:** `XY` is metres east and north of Marienplatz. Rings are open (first point not repeated), outer ring first, then holes.
 - **Shadow layer** is a `fill-extrusion` 0.3 m tall on purpose, so overlapping shadows do not darken each other.
 - **Building tiles:** layer `building`, properties `render_height`, `render_min_height`, `hide_3d`. Features with `hide_3d` are skipped. Missing height defaults to 6 m.
@@ -52,15 +52,14 @@ Passing: unit tests, type check, production build.
 
 Notes from that test:
 - Overpass is often overloaded (502, or 40 s for a tiny query). Retry before suspecting the query.
-- The console warning "Expected value to be of type number, but found null" comes from the Positron base style, not from our layers.
-- `npm audit` flags MapLibre 5 (GHSA-jrc7-96c5-q579); the fix needs the version 6 migration. Do not run `npm audit fix --force` without discussing it.
+- The console warning "Expected value to be of type number, but found null" comes from the road shield filters of the Positron base style, not from our layers.
 - In Claude's preview pane the page may only draw frames when a screenshot is taken, so the map `load` event can lag. That is the pane, not the app.
 
 ## Next steps, in order
 
 1. Done: live smoke test, first push, Pages deploy (site is live).
 2. Field check: compare five or so known terraces against reality and note results in the README.
-3. `git init -b main`, first commit, push to `https://github.com/Lugorrhoe/sonnenseite`, enable Pages with source "GitHub Actions". Use a personal or GitHub noreply commit email, not a work address.
+3. Done: repository at `https://github.com/Lugorrhoe/sonnenseite`, Pages via GitHub Actions. Commits use the GitHub noreply address, never a work address.
 4. Record a short demo GIF into `docs/demo.gif` and link it in the README.
 5. Roadmap items in the README (trees from LiDAR, LoD2 roofs, terrace polygons).
 

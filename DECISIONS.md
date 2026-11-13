@@ -43,3 +43,7 @@ Lukas asked Claude to understand the project and start on it. Claude ran the app
 - **Night message.** The "Sunny nearby" tab said "0 of N places are in the sun" plus an overcast note at night. It now says the sun is down.
 - **First venue snapshot committed** (9,909 places), so a fresh clone does not depend on a live Overpass query.
 - **MapLibre stays on version 5 for now** despite advisory GHSA-jrc7-96c5-q579, because the fix needs the unevaluated version 6 migration. Recorded in the README as a known issue. This one is Lukas's call to revisit.
+
+### 13 November 2026: MapLibre GL 6
+
+Lukas decided to migrate after Claude flagged the advisory. Claude moved `maplibre-gl` from 5.24 to 6.17: namespace import without the default fallback, the worker emitted as a separate asset and registered with `setWorkerUrl`, one event type adjusted. `npm audit` is clean. Checked in Chromium on the dev server and the production build; not checked in other browsers.

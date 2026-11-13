@@ -76,11 +76,11 @@ Checked by hand in a live smoke test on 11 November 2026 (Chromium, dev server, 
 - place panel, day timeline, yearly sun hours, ranking, weather tab, search results and share links produce plausible output
 - recomputing markers and shadows for one slider step took about 12 to 30 ms at zoom 15.4 in the old town on a laptop
 
-Known console noise: MapLibre logs "Expected value to be of type number, but found null". It appears to come from a label filter in the OpenFreeMap Positron style, not from this app's layers.
+Known console noise: MapLibre logs "Expected value to be of type number, but found null". It comes from the road shield filters in the OpenFreeMap Positron style (MapLibre 6 names the layers), not from this app.
 
 Not verified: field accuracy (does the map agree with the street?). A comparison against photos of a few known terraces is the natural next step. The `Test and deploy` workflow has run successfully and the published files match a local production build byte for byte; the service worker registers and caches the app shell in that build. Still untested: phones, Safari and Firefox, geolocation, notifications, the installed web app and the nightly `Refresh venue data` workflow.
 
-Known issue: `npm audit` reports advisory GHSA-jrc7-96c5-q579 (HTML sanitizer bypass) for MapLibre GL 5; the fix is only in version 6, which this project has not been migrated to yet. The app passes no external HTML to MapLibre popups or attribution, but the upgrade is on the roadmap.
+MapLibre GL was moved from version 5 to 6 on 13 November 2026, which cleared advisory GHSA-jrc7-96c5-q579; `npm audit` reports no known vulnerabilities. Dev and production builds were rechecked in Chromium after the move.
 
 ## Run it locally
 
@@ -104,7 +104,6 @@ To cover another city, change `MUC` and `MUC_BBOX` in `src/lib/geo.ts` and `OVER
 
 ## Roadmap
 
-- Move to MapLibre GL 6 (clears the open security advisory)
 - Trees from open LiDAR surface models
 - Official LoD2 building models from the Bavarian surveying office for real roof shapes
 - Terrace polygons where OpenStreetMap has them (`outdoor_seating` areas)

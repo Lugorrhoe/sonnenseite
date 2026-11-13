@@ -1,6 +1,7 @@
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './style.css';
-import * as ml from 'maplibre-gl';
+import * as maplibregl from 'maplibre-gl';
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 import { BuildingStore } from './lib/buildings';
 import { MUC, MUC_BBOX, XY, dist, toLngLat, toXY } from './lib/geo';
 import { MAX_REACH, shadowPolygons } from './lib/shadow';
@@ -14,8 +15,9 @@ import {
 import { CATEGORIES, Category, Venue, loadVenues } from './lib/venues';
 import { OVERCAST, Weather, hourAt, loadWeather, skyLabel } from './lib/weather';
 
-// MapLibre ships as a UMD file; depending on the bundler it arrives as a namespace or as a default export.
-const maplibregl: typeof ml = (ml as unknown as { default?: typeof ml }).default ?? ml;
+// MapLibre 6 is ESM only and loads its worker from a separate file next to the library.
+// Once bundled, that relative lookup no longer works, so the worker is emitted as an asset and named explicitly.
+maplibregl.setWorkerUrl(workerUrl);
 
 // ---------------------------------------------------------------- state
 
@@ -73,7 +75,7 @@ const map = new maplibregl.Map({
 map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
 const geolocate = new maplibregl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: false });
 map.addControl(geolocate, 'top-right');
-geolocate.on('geolocate', (e: GeolocationPosition) => {
+geolocate.on('geolocate', (e) => {
   userXY = toXY(e.coords.longitude, e.coords.latitude);
   scheduleRefresh();
 });
@@ -267,7 +269,7 @@ function refreshMap() {
     }
     features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [v.lng, v.lat] }, properties: { id: v.id, name: v.name, s } });
   }
-  (map.getSource('venues') as ml.GeoJSONSource).setData({ type: 'FeatureCollection', features });
+  (map.getSource('venues') as maplibregl.GeoJSONSource).setData({ type: 'FeatureCollection', features });
 
   // Shadow layer
   const shadows: GeoJSON.Feature[] = [];
@@ -290,7 +292,7 @@ function refreshMap() {
   } else if (viewReady && day && zoom < SHADOW_ZOOM) {
     hint = 'Zoom in a little more to see the shadows';
   }
-  (map.getSource('shadows') as ml.GeoJSONSource).setData({ type: 'FeatureCollection', features: shadows });
+  (map.getSource('shadows') as maplibregl.GeoJSONSource).setData({ type: 'FeatureCollection', features: shadows });
 
   if (!hint && !day) hint = 'The sun is down at this time';
   const h = sky();
